@@ -22,13 +22,6 @@ const Navbar = () => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
 
-//  const handleOpen = () => {
-//    setOpen(true);
-//  };
-//
-//  const handleClose = () => {
-//    setOpen(false);
-//  };
 
   return (
     <AppBar position="static">
@@ -46,9 +39,7 @@ const Navbar = () => {
         </Typography>
       
       
-      <Button component={Link} to="/" variant="contained" color="inherit">
-        Contiunue Shopping
-      </Button>
+    
       
       <Button component={Link} to="/cart" variant="contained" color="inherit">
         My Cart
