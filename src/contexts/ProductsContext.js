@@ -1,5 +1,5 @@
 import React, { createContext, useState } from 'react';
-import { dummyProducts } from '../services/dummy';
+import { dummyProducts } from '../dummy';
 export const ProductsContext = createContext()
 
 const ProductsContextProvider = ({children}) => {
