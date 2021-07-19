@@ -1,17 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
-import cartReducer from './components/reducers/cartReducer';
-import { Provider } from 'react-redux';
-import { createStore } from 'redux';
-import reportWebVitals from './reportWebVitals';
+import Routes from './routes';
 
 
+import { HelmetProvider } from 'react-helmet-async';
+import ProductsContextProvider from './contexts/ProductsContext';
+import CartContextProvider from './contexts/CartContext';
 
-const store = createStore(cartReducer);
-
-ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));
-
-
+ReactDOM.render(
+    <HelmetProvider>
+      <ProductsContextProvider>
+        <CartContextProvider>
+          <Routes />
+        </CartContextProvider>
+      </ProductsContextProvider>
+    </HelmetProvider>,
+  document.getElementById('root')
+);
 
 
