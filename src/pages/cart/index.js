@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 
 const Cart = () => {
 
-    const { total, cartItems, itemCount, clearCart,checkout, handlePromoCode, handleCheckout } = useContext(CartContext);
+    const { total, cartItems, itemCount, clearCart,checkout,promo, handlePromoCode, handleCheckout } = useContext(CartContext);
     
      
    
@@ -35,7 +35,9 @@ const Cart = () => {
                             <div className="p-3 text-center text-success">
                                 <p>Checkout successfull</p>
                                 <Link to="/" className="btn btn-outline-success btn-sm">BUY MORE</Link>
+        
                             </div>
+                            
                         }
                     </div>
                     {
@@ -50,10 +52,15 @@ const Cart = () => {
                                 
                                <form>
                                     <div className="d-flex" >
-                                        <input  type="text" name="promo_code" placeholder="ENTER PROMO CODE" className="form-control" id="" />
+                                        <input  type="text" name="promo_code" placeholder="ENTER PROMO CODE" className="form-control" id="promo_code" />
                                             <button type="button" className="btn btn-outlineprimary btn-sm" onClick={handlePromoCode}>Submit</button>
                                     </div>
                                 </form>
+                            {promo &&
+                                <p className="mb-1">Promo code applied </p>
+                            }
+                            
+                                
                                     <br /><br /><br />
                                                 
                                 <div className="text-center">

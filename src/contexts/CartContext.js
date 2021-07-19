@@ -4,7 +4,7 @@ import { CartReducer, sumItems } from './CartReducer';
 export const CartContext = createContext()
 
 const storage = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : [];
-const initialState = { cartItems: storage, ...sumItems(storage), checkout: false };
+const initialState = { cartItems: storage, ...sumItems(storage), checkout: false, promo: false };
 
 const CartContextProvider = ({children}) => {
 
@@ -29,8 +29,9 @@ const CartContextProvider = ({children}) => {
     const clearCart = () => {
         dispatch({type: 'CLEAR'})
     }
-    const handlePromoCode = payload => {
-        dispatch({type: 'PROMO_CODE', payload})
+    const handlePromoCode = () => {
+        console.log('PROMO', state);
+        dispatch({type: 'PROMO_CODE'})
     }
 
     const handleCheckout = () => {
