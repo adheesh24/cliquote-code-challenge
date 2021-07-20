@@ -25,12 +25,15 @@ export const CartReducer = (state, action) => {
             return {
                 ...state,
                 ...sumItems(state.cartItems),
+                checkout: false,
+                promo:false,
                 cartItems: [...state.cartItems]
             }
         case "REMOVE_ITEM":
             return {
                 ...state,
                 ...sumItems(state.cartItems.filter(item => item.id !== action.payload.id)),
+                promo:false,
                 cartItems: [...state.cartItems.filter(item => item.id !== action.payload.id)]
             }
         case "INCREASE":
@@ -38,6 +41,7 @@ export const CartReducer = (state, action) => {
             return {
                 ...state,
                 ...sumItems(state.cartItems),
+                promo:false,
                 cartItems: [...state.cartItems]
             }
         case "DECREASE":
@@ -45,28 +49,30 @@ export const CartReducer = (state, action) => {
             return {
                 ...state,
                 ...sumItems(state.cartItems),
+                promo:false,
                 cartItems: [...state.cartItems]
             }
         case "PROMO_CODE":
-            
-            var promoCode = document.getElementById("promo_code").value
+            //var promoCode
+             state.inputPromo = document.getElementById("promo_code").value
             console.log(state.total)
             console.log(state.promo)
+            console.log(state.inputPromo)
             if(state.promo === false){
-                if(promoCode.localeCompare("RRD4D32") ===0 && state.total >=5000){
+                if(state.inputPromo.localeCompare("RRD4D32") ===0 && state.total >=5000){
                    // get 10% percent off
-                    state.total = state.total - (state.total/10);
-                    console.log(state.total)
+                    state.discountTotal = state.total - (state.total/10);
+                    console.log(state.discountTotal)
                     return {
                     ...state,
                     promo:true,
                     cartItems: [...state.cartItems]
                     }   
                 }
-                else if(promoCode.localeCompare("44F4T11") ===0 && state.total>=10000){
+                else if(state.inputPromo.localeCompare("44F4T11") ===0 && state.total>=10000){
                     //get 15% percent off 
-                    state.total = state.total - (state.total/15);
-                    console.log(state.total)
+                    state.discountTotal = state.total - (state.total/15);
+                    console.log(state.discountTotal)
                    return {
                     ...state,
                     promo:true,
@@ -84,7 +90,7 @@ export const CartReducer = (state, action) => {
             else{
                 return {
                     ...state,
-                    promo:true,
+                    promo:false,
                     cartItems: [...state.cartItems]
                     }
                 
@@ -96,6 +102,7 @@ export const CartReducer = (state, action) => {
             return {
                 cartItems: [],
                 checkout: true,
+                promo:false,
                 ...sumItems([]),
             }
         case "CLEAR":

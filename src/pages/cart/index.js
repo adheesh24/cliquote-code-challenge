@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import Layout from '../../components/Layout';
 
 import CartProducts from './CartProducts';
@@ -6,11 +6,14 @@ import { CartContext } from '../../contexts/CartContext';
 import { formatNumber } from '../../helpers/utils';
 import { Link } from 'react-router-dom';
 
+
 const Cart = () => {
 
-    const { total, cartItems, itemCount, clearCart,checkout,promo, handlePromoCode, handleCheckout } = useContext(CartContext);
+    const [input, setInput] = useState("")
     
-     
+    const { total, discountTotal, cartItems, itemCount, clearCart,checkout,promo, handlePromoCode, handleCheckout, inputPromo } = useContext(CartContext);
+    
+   
    
    
     return ( 
@@ -46,18 +49,31 @@ const Cart = () => {
                             <div className="card card-body">
                                 <p className="mb-1">Total Items</p>
                                 <h4 className=" mb-3 txt-right">{itemCount}</h4>
-                                <p className="mb-1">Total Payment</p>
+                                <p className="mb-1">Cart Total</p>
                                 <h3 className="m-0 txt-right">{formatNumber(total)}</h3>
+                            
+                            {promo &&
+                                
+                                <div>
+                                <br />
+                                <p className="mb-1">Discount: - {formatNumber(total - discountTotal)}</p>
+                                <p className="mb-1">Total Payable Amount</p>
+                                <h2 className="m-0 txt-right">{formatNumber(discountTotal)}</h2>
+                                                               </div>
+                                
+                            }
                                 <hr className="my-4"/>
+                                    
                                 
                                <form>
                                     <div className="d-flex" >
-                                        <input  type="text" name="promo_code" placeholder="ENTER PROMO CODE" className="form-control" id="promo_code" />
+                                        <input  type="text" name="promo_code" placeholder="ENTER PROMO CODE" className="form-control" id="promo_code" value= {inputPromo} onChange={(e) => handlePromoCode(e.target.value)} />
                                             <button type="button" className="btn btn-outlineprimary btn-sm" onClick={handlePromoCode}>Submit</button>
                                     </div>
                                 </form>
                             {promo &&
                                 <p className="mb-1">Promo code applied </p>
+                                
                             }
                             
                                 
