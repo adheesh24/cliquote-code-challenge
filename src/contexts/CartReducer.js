@@ -59,7 +59,9 @@ export const CartReducer = (state, action) => {
             console.log(state.promo)
             console.log(state.inputPromo)
             if(state.promo === false){
-                if(state.inputPromo.localeCompare("RRD4D32") ===0 && state.total >=5000){
+                 
+                console.log((state.inputPromo).toUpperCase())
+                if((state.inputPromo).toUpperCase().localeCompare("RRD4D32")===0  && state.total >=5000){
                    // get 10% percent off
                     state.discountTotal = state.total - (state.total/10);
                     console.log(state.discountTotal)
@@ -69,7 +71,7 @@ export const CartReducer = (state, action) => {
                     cartItems: [...state.cartItems]
                     }   
                 }
-                else if(state.inputPromo.localeCompare("44F4T11") ===0 && state.total>=10000){
+                else if((state.inputPromo).toUpperCase().localeCompare("44F4T11") ===0 && state.total>=10000){
                     //get 15% percent off 
                     state.discountTotal = state.total - (state.total/15);
                     console.log(state.discountTotal)
